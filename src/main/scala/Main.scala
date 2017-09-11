@@ -7,15 +7,18 @@ import scala.util.control.NonFatal
 
 
 class SomeActor extends Actor with ActorLogging {
-   
+
+  import scala.concurrent.duration._
+  import context.dispatcher
+
   def receive = {
     case "Ping" =>
       log.info("received ping")
-      sender ! "Pong"
+      context.system.scheduler.schedule(0 seconds,
+        scala.util.Random.nextInt(1200) milliseconds, self, "Ping")
   }
 
 }
-
 
 object Main extends App {
 
@@ -33,15 +36,10 @@ object Main extends App {
     case NonFatal(e) => println("couldn't load agent")
   }
 
-
   implicit val system = ActorSystem("minimal")
-
-  import system.dispatcher
-
-  import scala.concurrent.duration._
 
   val actor = system.actorOf(Props(classOf[SomeActor]))
 
-  system.scheduler.schedule(0 seconds, 1 seconds, actor, "Ping")
+  actor ! "Ping"
 
 }
