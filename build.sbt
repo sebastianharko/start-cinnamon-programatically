@@ -1,5 +1,3 @@
-
-
 name := "minimal-cluster"
 
 version := "1.0"
