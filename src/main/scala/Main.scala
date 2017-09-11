@@ -26,7 +26,8 @@ object Main extends App {
   val p = nameOfRunningVM.indexOf('@')
   val pid = nameOfRunningVM.substring(0, p)
 
-  val jarFilePath: String = "~/.ivy2/local/com.lightbend.cinnamon/cinnamon-agent/2.6.0-SNAPSHOT/jars/cinnamon-agent.jar"
+  val jarFilePath: String = System.getProperty("user.home") +
+  "/.ivy2/local/com.lightbend.cinnamon/cinnamon-agent/2.6.0-SNAPSHOT/jars/cinnamon-agent.jar"
 
   try {
     val vm = VirtualMachine.attach(pid)
@@ -35,8 +36,6 @@ object Main extends App {
   } catch {
     case NonFatal(e) => println("couldn't load agent")
   }
-
-
 
   implicit val system = ActorSystem("minimal")
 
