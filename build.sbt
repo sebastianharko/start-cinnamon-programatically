@@ -11,4 +11,3 @@ libraryDependencies += "com.lightbend.cinnamon" %% "cinnamon-chmetrics" % "2.6.0
 libraryDependencies += "com.lightbend.cinnamon" %% "cinnamon-chmetrics-statsd-reporter" % "2.6.0-SNAPSHOT"
 
 libraryDependencies += "com.lightbend.cinnamon" %% "cinnamon-akka" % "2.6.0-SNAPSHOT"
-
